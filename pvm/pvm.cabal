@@ -7,6 +7,8 @@ build-type:    Simple
 common warnings
   ghc-options:      -Wall
   default-language: Haskell2010
+  build-depends:
+    base                  ^>=4.19.0.0
 
 library
   import:          warnings
@@ -15,8 +17,7 @@ library
     Types
 
   build-depends:
-    , aeson
-    , base                  ^>=4.18.2.1
+    aeson
     , directory
     , filepath
     , mtl
@@ -31,8 +32,7 @@ executable pvm
   import:         warnings
   main-is:        Main.hs
   build-depends:
-    , aeson
-    , base                  ^>=4.18.2.1
+    aeson
     , directory
     , filepath
     , mtl
@@ -50,7 +50,6 @@ test-suite tests
   hs-source-dirs: test
   main-is:        Main.hs
   build-depends:
-    , base         ^>=4.18.2.1
-    , pvm
+    pvm
     , tasty
     , tasty-hunit
