@@ -39,7 +39,7 @@
     {
       overlays.default = final: prev: {
         pvm =
-          final.haskell.packages.ghc984.callPackage ./default.nix { };
+          final.haskell.packages.ghc984.callPackage ./pvm { };
       };
     };
 }
