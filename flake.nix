@@ -1,16 +1,16 @@
 {
   inputs = {
-    nixpkgs.url = "github:nixos/nixpkgs/25.05";
+    nixpkgs.url = "github:nixos/nixpkgs/25.11";
     flake-utils.url = "github:numtide/flake-utils";
   };
 
   outputs = { nixpkgs, flake-utils, ... }:
-    flake-utils.lib.eachDefaultSystem
+    flake-utils.lib.eachSystem
+      [ "x86_64-linux" "aarch64-darwin" ]
       (system:
         let
           pkgs = nixpkgs.legacyPackages.${system};
-          compiler = "ghc984";
-          pvm = pkgs.haskell.packages.${compiler}.callPackage ./pvm { };
+          pvm = pkgs.haskellPackages.callPackage ./pvm { };
         in
         {
           packages = rec {
@@ -19,7 +19,7 @@
           };
           devShells.default = pkgs.mkShell {
             LD_LIBRARY_PATH = pkgs.lib.makeLibraryPath [ pkgs.zlib ];
-            buildInputs = with pkgs.haskell.packages.${compiler}; [
+            buildInputs = with pkgs.haskellPackages; [
               ghc
               cabal-install
               ghcid
@@ -39,7 +39,7 @@
     {
       overlays.default = final: prev: {
         pvm =
-          final.haskell.packages.ghc984.callPackage ./pvm { };
+          final.haskellPackages.callPackage ./pvm { };
       };
     };
 }

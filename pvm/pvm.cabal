@@ -8,7 +8,7 @@ common warnings
   ghc-options:      -Wall
   default-language: Haskell2010
   build-depends:
-    base                  ^>=4.19.0.0
+    base
 
 library
   import:          warnings
